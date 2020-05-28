@@ -1,0 +1,79 @@
+{
+"$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+  "parameters": {
+    "profileName": {
+      "type": "string",
+      "metadata": {
+        "description": "CDN profile name"
+      }
+    },
+    "customDomain": {
+      "type": "string",
+      "metadata": {
+        "description": "Custom domain for CDN endpoint"
+      }
+    },
+    "originUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Url of the origin"
+      }
+    },
+	"originHostHeader": {
+      "type": "string",
+      "metadata": {
+        "description": "Url of the origin host header"
+      }
+    },
+	"icpNumber": {
+      "type": "string",
+      "metadata": {
+        "description": "ICP number"
+      }
+    },
+    "optimizationType": {
+      "type": "string",
+      "allowedValues": [
+        "Web",
+        "Download",
+        "VOD",
+		"LiveStreaming",
+        "ImageProcessing"
+      ],
+      "metadata": {
+        "description": "Optimization type."
+      }
+    }
+  },
+"resources": [
+    {
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "apiVersion": "2019-04-15",
+        "name": "[concat(parameters('profileName'), '/', replace(replace(parameters('customDomain'),'*', 'wildcard980AE073'), '.', '-'))]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "originHostHeader": "[parameters('originHostHeader')]",
+            "isHttpAllowed": true,
+            "isHttpsAllowed": false,
+            "origins": [
+                {
+                    "name": "myorigin",
+                    "properties": {
+                        "hostName": "[parameters('originUrl')]"
+                    }
+                }
+            ],
+            "customDomains": [
+                {
+                    "name": "[replace(replace(parameters('customDomain'),'*', 'wildcard980AE073'), '.', '-')]",
+                    "properties": {
+                        "hostName": "[parameters('customDomain')]",
+                        "validationData": "[parameters('icpNumber')]"
+                    }
+                }
+            ],
+            "optimizationType":"[parameters('optimizationType')]"
+        }
+    }
+]}
