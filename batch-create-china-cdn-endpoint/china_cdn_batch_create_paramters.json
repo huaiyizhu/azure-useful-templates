@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cdnSettings": {
+      "value": {
+        "settings": [
+          {
+            "profileName": "bzhan-test-powershell-1",
+            "customDomain": "armtemplate20200704.earthware.com.cn",
+            "originUrl": "huaiyiztesthost1.blob.core.chinacloudapi.cn",
+            "originHostHeader": "huaiyiztesthost1.blob.core.chinacloudapi.cn",
+            "icpNumber": "icp12345",
+            "optimizationType": "Download"
+          },
+          {
+            "profileName": "bzhan-test-powershell-1",
+            "customDomain": "armtemplate20200705.earthware.com.cn",
+            "originUrl": "huaiyiztesthost1.blob.core.chinacloudapi.cn",
+            "originHostHeader": "huaiyiztesthost1.blob.core.chinacloudapi.cn",
+            "icpNumber": "icp12345",
+            "optimizationType": "Download"
+          }
+        ]
+      }
+    }
+  }
+}

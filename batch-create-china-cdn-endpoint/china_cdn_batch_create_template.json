@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cdnSettings": {
+      "type": "object"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Cdn/profiles/endpoints",
+      "apiVersion": "2019-04-15",
+      "name": "[concat(parameters('cdnSettings').settings[copyIndex()].profileName, '/', replace(replace(parameters('cdnSettings').settings[copyIndex()].customDomain,'*', 'wildcard980AE073'), '.', '-'))]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "originHostHeader": "[parameters('cdnSettings').settings[copyIndex()].originHostHeader]",
+        "isHttpAllowed": true,
+        "isHttpsAllowed": false,
+        "origins": [
+          {
+            "name": "myorigin",
+            "properties": {
+              "hostName": "[parameters('cdnSettings').settings[copyIndex()].originUrl]"
+            }
+          }
+        ],
+        "customDomains": [
+          {
+            "name": "[replace(replace(parameters('cdnSettings').settings[copyIndex()].customDomain,'*', 'wildcard980AE073'), '.', '-')]",
+            "properties": {
+              "hostName": "[parameters('cdnSettings').settings[copyIndex()].customDomain]",
+              "validationData": "[parameters('cdnSettings').settings[copyIndex()].icpNumber]"
+            }
+          }
+        ],
+        "optimizationType": "[parameters('cdnSettings').settings[copyIndex()].optimizationType]"
+      },
+      "copy": {
+        "name": "cdncopy",
+        "count": "[length(parameters('cdnSettings').settings)]",
+        "mode": "serial",
+        "batchSize": 2
+      }
+    }
+  ]
+}

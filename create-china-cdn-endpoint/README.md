@@ -1,6 +1,6 @@
 # Overview
 Azure CLI and Azure Powershell's built-in CDN commands did not support creating China CDN endpoints for the moment. 
-If you have the requirement, suggest to use ARM template as a workaround.
+If you have the requirement, suggest to use ARM template as a workaround. Remember to modify the parameters according to your requirements.
 
 Powershell command goes like:
 
