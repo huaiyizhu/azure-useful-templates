@@ -1,0 +1,72 @@
+{
+"$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+  "parameters": {
+    "profileName": {
+      "type": "string",
+      "metadata": {
+        "description": "CDN profile name"
+      }
+    },
+	"endpointName": {
+      "type": "string",
+      "metadata": {
+        "description": "CDN endpoint name"
+      }
+    },
+    "originUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Url of the origin"
+      }
+    },
+	"originHostHeader": {
+      "type": "string",
+      "metadata": {
+        "description": "Url of the origin host header"
+      }
+    },
+	"probePath": {
+      "type": "string",
+      "metadata": {
+        "description": "Probe path"
+      }
+    },
+    "optimizationType": {
+      "type": "string",
+      "allowedValues": [
+        "DynamicSiteAcceleration",
+        "GeneralWebDelivery",
+        "GeneralMediaStreaming",
+		"VideoOnDemandMediaStreaming",
+        "LiveMediaStreaming",
+		"LargeFileDownload"
+      ],
+      "metadata": {
+        "description": "Optimization type."
+      }
+    }
+  },
+"resources": [
+    {
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "apiVersion": "2019-04-15",
+        "name": "[concat(parameters('profileName'), '/', parameters('endpointName'))]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "originHostHeader": "[parameters('originHostHeader')]",
+            "isHttpAllowed": true,
+            "isHttpsAllowed": true,
+            "origins": [
+                {
+                    "name": "myorigin",
+                    "properties": {
+                        "hostName": "[parameters('originUrl')]"
+                    }
+                }
+            ],
+            "optimizationType":"[parameters('optimizationType')]",
+			"probePath":"[parameters('probePath')]"
+        }
+    }
+]}

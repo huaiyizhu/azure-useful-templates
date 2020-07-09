@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+	    "profileName": {
+            "value": "DSA"
+        },
+		"endpointName": {
+            "value": "bzhantest-dsa"
+        },
+        "originUrl": {
+            "value": "huaiyiztesthost1.blob.core.chinacloudapi.cn"
+        },
+        "originHostHeader": {
+            "value": "huaiyiztesthost1.blob.core.chinacloudapi.cn"
+        },
+        "optimizationType": {
+            "value": "DynamicSiteAcceleration"
+        },
+		"probePath": {
+            "value": "/test1/azure.txt"
+        }
+    }
+}
