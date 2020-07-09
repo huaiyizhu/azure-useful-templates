@@ -12,7 +12,7 @@ Azure CLI command goes like:
 
 Make sure to use different deployment names if you want to create endpoints in parallel.
 
-Logging is also require, use below command for logging:
+Logining is also required, use below command for logining:
 
 `az cloud set -n AzureCloud`
 
