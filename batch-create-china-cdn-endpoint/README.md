@@ -2,7 +2,7 @@
 Azure CLI and Azure Powershell's built-in CDN commands did not support creating China CDN endpoints for the moment. 
 If you have the requirement, suggest to use ARM template as a workaround. 
 <br>
-This tempalte is for endpoint batch creation, it will create the endpoints in serial model with batch side as 2. Remember to modify the parameters according to your requirements.
+This template is for endpoint batch creation, it will create the endpoints in serial model with batch side as 2. Remember to modify the parameters according to your requirements.
 
 Powershell command goes like:
 
